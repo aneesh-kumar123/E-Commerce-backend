@@ -1,0 +1,284 @@
+{
+  "routes":[
+    
+      {
+      
+          "controller":"../components/user/controller/user.js",
+          "route":"/api/v1/user/admin-register",
+          "method":"post",
+          "action":"createAdmin",
+          "isAdmin":false,
+          "isUser":false
+        
+      },
+      {
+          "controller":"../components/user/controller/user.js",
+          "route":"/api/v1/user/login",
+          "method":"post",
+          "action":"login",
+          "isAdmin":false,
+          "isUser":false
+          
+      },
+      {
+          "controller":"../components/user/controller/user.js",
+          "route":"/api/v1/user/user-register",
+          "method":"post",
+          "action":"createUser",
+          "isAdmin":false,
+          "isUser":false
+        
+
+      },
+
+      {
+        "controller":"../components/user/controller/user.js",
+        "route":"/api/v1/user",
+        "method":"get",
+        "action":"getAllUsers",
+        "isAdmin":true,
+        "isUser":false
+      
+
+    },
+    {
+        "controller":"../components/user/controller/user.js",
+        "route":"/api/v1/user/:userId",
+        "method":"get",
+        "action":"getUserById",
+        "isAdmin":true,
+        "isUser":false
+        
+
+    },
+    {
+        "controller":"../components/user/controller/user.js",
+        "route":"/api/v1/user/:userId",
+        "method":"put",
+        "action":"updateUserById",
+        "isAdmin":false,
+        "isUser":false     
+        
+        
+
+    },
+    {
+        "controller":"../components/user/controller/user.js",
+        "route":"/api/v1/user/:userId",
+        "method":"delete",
+        "action":"deleteUserById",
+        "isAdmin":false,
+        "isUser":false
+      
+
+    },
+    {
+      "controller": "../components/category/controller/category.js",
+      "route": "/api/v1/category",
+      "method": "post",
+      "action": "createCategory",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/category/controller/category.js",
+      "route": "/api/v1/category",
+      "method": "get",
+      "action": "getAllCategories",
+      "isAdmin": false,
+      "isUser": false
+    },
+    {
+      "controller": "../components/category/controller/category.js",
+      "route": "/api/v1/category/:categoryId",
+      "method": "get",
+      "action": "getCategoryById",
+      "isAdmin": false,
+      "isUser": false
+    },
+    {
+      "controller": "../components/category/controller/category.js",
+      "route": "/api/v1/category/:categoryId",
+      "method": "put",
+      "action": "updateCategory",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/category/controller/category.js",
+      "route": "/api/v1/category/:categoryId",
+      "method": "delete",
+      "action": "deleteCategory",
+      "isAdmin": true,
+      "isUser": false
+    
+
+    },
+    {
+      "controller": "../components/product/controller/product.js",
+      "route": "/api/v1/category/:categoryId/product",
+      "method": "post",
+      "action": "createProduct",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/product/controller/product.js",
+      "route": "/api/v1/product",
+      "method": "get",
+      "action": "getAllProducts",
+      "isAdmin": false,
+      "isUser": false
+    },
+    {
+      "controller": "../components/product/controller/product.js",
+      "route": "/api/v1/product/:productId",
+      "method": "get",
+      "action": "getProductById",
+      "isAdmin": false,
+      "isUser": false
+    },
+    {
+      "controller": "../components/product/controller/product.js",
+      "route": "/api/v1/product/:productId",
+      "method": "put",
+      "action": "updateProduct",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/product/controller/product.js",
+      "route": "/api/v1/product/:productId",
+      "method": "delete",
+      "action": "deleteProduct",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/cart/controller/cart.js",
+      "route": "/api/v1/cart/:userId",
+      "method": "get",
+      "action": "getCartByUserId",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/cart/controller/cart.js",
+      "route": "/api/v1/cart/:userId",
+      "method": "put",
+      "action": "updateCart",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/cart/controller/cart.js",
+      "route": "/api/v1/cart/:userId",
+      "method": "delete",
+      "action": "clearCart",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/order/controller/order.js",
+      "route": "/api/v1/order/:userId",
+      "method": "post",
+      "action": "createOrder",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/order/controller/order.js",
+      "route": "/api/v1/orders",
+      "method": "get",
+      "action": "getAllOrders",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/order/controller/order.js",
+      "route": "/api/v1/order/:userId/:orderId",
+      "method": "get",
+      "action": "getOrderById",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/order/controller/order.js",
+      "route": "/api/v1/order/:orderId",
+      "method": "put",
+      "action": "updateOrder",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/order/controller/order.js",
+      "route": "/api/v1/order/:orderId",
+      "method": "delete",
+      "action": "deleteOrder",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/orderItem/controller/orderItem.js",
+      "route": "/api/v1/order-item/:orderId",
+      "method": "get",
+      "action": "getOrderItemsByOrderId",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/orderItem/controller/orderItem.js",
+      "route": "/api/v1/order-item",
+      "method": "post",
+      "action": "createOrderItem",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/orderItem/controller/orderItem.js",
+      "route": "/api/v1/order-item/:orderItemId",
+      "method": "put",
+      "action": "updateOrderItem",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/orderItem/controller/orderItem.js",
+      "route": "/api/v1/order-item/:orderItemId",
+      "method": "delete",
+      "action": "deleteOrderItem",
+      "isAdmin": true,
+      "isUser": false
+    },
+    {
+      "controller": "../components/payment/controller/payment.js",
+      "route": "/api/v1/payment",
+      "method": "post",
+      "action": "createPayment",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/payment/controller/payment.js",
+      "route": "/api/v1/payment/:orderId",
+      "method": "get",
+      "action": "getPaymentByOrderId",
+      "isAdmin": false,
+      "isUser": true
+    },
+    {
+      "controller": "../components/payment/controller/payment.js",
+      "route": "/api/v1/payment/:paymentId",
+      "method": "put",
+      "action": "updatePaymentStatus",
+      "isAdmin": true,
+      "isUser": false
+    }
+
+    
+
+
+
+    
+  ]
+}
