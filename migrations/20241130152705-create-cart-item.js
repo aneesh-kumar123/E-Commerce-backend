@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4, // Default UUID generation
+        defaultValue: Sequelize.UUIDV4, 
       },
       cart_id: {
         type: Sequelize.UUID,
@@ -40,6 +40,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
+      },
+      deleted_at: {
+        allowNull: true,
+        type: Sequelize.DATE, 
       },
     });
   },

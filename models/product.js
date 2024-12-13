@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class product extends Model {
     static associate(models) {
-      // A product belongs to a category (many-to-one relationship)
+      
       product.belongsTo(models.category, { foreignKey: 'categoryId' });
       product.hasMany(models.orderItem);
       product.hasMany(models.cartItem);
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: true,  // This will store the image URL or path
+        allowNull: true,  
       },
     },
     {

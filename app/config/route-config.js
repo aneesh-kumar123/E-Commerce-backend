@@ -4,6 +4,8 @@ const {
   
 } = require("../middleware/authService");
 
+const upload = require("../middleware/multerConfig");
+
 class RouteConfig {
   constructor() {}
 
@@ -128,9 +130,18 @@ class RouteConfig {
     }
 
 
-    application.route(route)[method]((req, res, next) => {
-      controller[action](req, res, next);
-    });
+    if (route === "/api/v1/csv-category/upload") {
+      application.route(route)[method](
+        upload.single("file"), // Multer middleware for file upload
+        (req, res, next) => {
+          controller[action](req, res, next);
+        }
+      );
+    } else {
+      application.route(route)[method]((req, res, next) => {
+        controller[action](req, res, next);
+      });
+    }
   }
 
   createConfigRoute(application, settingsConfig) {

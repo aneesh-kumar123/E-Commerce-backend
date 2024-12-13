@@ -1,5 +1,11 @@
 const express = require("express");
 const application = express();
+const fs = require("fs");
+const path = "uploads";
+
+if(!fs.existsSync(path)){
+  fs.mkdirSync(path,{recursive:true});
+}
 const cors = require("cors");
 const routeConfig = require("./app/config/route-config.js");
 const cookieParser = require("cookie-parser");

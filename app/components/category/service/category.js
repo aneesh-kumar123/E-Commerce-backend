@@ -4,6 +4,8 @@ const Logger = require("../../../utils/logger");
 const NotFoundError = require("../../../errors/notFoundError");
 const { transaction, rollBack, commit } = require("../../../utils/transaction");
 const { parseLimitAndOffset, parseFilterQueries,parseSelectFields } = require("../../../utils/request");
+const { createUUID } = require("../../../utils/uuid");
+
 
 class CategoryService {
   
@@ -172,6 +174,36 @@ class CategoryService {
       await category.destroy({ transaction: t });
       await commit(t);
       Logger.info("Delete category service ended...");
+      return category;
+    } catch (error) {
+      await rollBack(t);
+      Logger.error(error);
+      throw error;
+    }
+  }
+
+  async addMultipleCategory(category, t) {
+    if (!t) {
+      t = await transaction();
+    }
+    try {
+      Logger.info("Add multiple category service started...");
+
+      const categoryPromise = category.map(async (category) => {
+        await categoryConfig.model.create(
+          {
+            ...category,
+            id: createUUID(), // Ensure each employee gets a unique ID
+          },
+          { transaction: t }
+        );
+      });
+
+      await Promise.all(categoryPromise);
+
+      await commit(t);
+
+      Logger.info("Add multiple employees service ended...");
       return category;
     } catch (error) {
       await rollBack(t);

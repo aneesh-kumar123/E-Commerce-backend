@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     static associate(models) {
-      // An order belongs to a user (many-to-one relationship)
+      
       Order.belongsTo(models.user, { foreignKey: 'userId' });
 
       // An order has many order items (one-to-many relationship)

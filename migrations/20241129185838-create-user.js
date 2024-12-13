@@ -7,17 +7,17 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4, // Default UUID generation
+        defaultValue: Sequelize.UUIDV4, 
       },
       username: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true, // Username should be unique
+        unique: true, 
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true, // Ensure unique email addresses
+        unique: true, 
       },
       password: {
         type: Sequelize.STRING,

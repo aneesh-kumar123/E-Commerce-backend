@@ -82,10 +82,11 @@ class UserService {
     password,
     email,
     dateOfBirth,
-    isAdmin,
     address,
     city,
     profileImage,
+    isAdmin,
+    
     t
   ) {
     if (!t) {
@@ -94,6 +95,19 @@ class UserService {
 
     try {
       Logger.info("Create user service started...");
+
+      console.log("id: ", id);
+      console.log("firstName: ", firstName);
+      console.log("lastName: ", lastName);
+      console.log("username: ", username);
+      console.log("password: ", password);
+      console.log("email: ", email);
+      console.log("dateOfBirth: ", dateOfBirth);
+      console.log("address: ", address);
+      console.log("city: ", city);
+      console.log("profileImage: ", profileImage);
+      console.log("isAdmin: ", isAdmin);
+
 
       let fullName = `${firstName} ${lastName}`;
       const hashedPassword = await bcrypt.hash(password, 10);

@@ -3,9 +3,9 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    // Associations can be defined here
+   
     static associate(models) {
-      // A User has many orders (or any other relationships)
+      
       User.hasMany(models.order);
       User.hasOne(models.cart);
     }
@@ -70,10 +70,11 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: 'user',
       tableName: 'users',
-      underscored: true, // Ensure the field names are snake_case
-      paranoid: true, // Soft delete enabled
+      underscored: true, 
+      paranoid: true, 
     }
   );
+  
 
   return User;
 };

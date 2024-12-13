@@ -33,7 +33,7 @@ class OrderService {
   }
 
   
-  async createOrder(id,userId, orderStatus, totalAmount, paymentStatus, paymentMethod, shippingAddress, t) {
+  async createOrder(id,userId, orderStatus,  paymentStatus, paymentMethod, t) {
     if (!t) {
       t = await transaction();
     }
@@ -160,7 +160,7 @@ class OrderService {
   }
 
  
-  async getOrderById(userId,orderId, query, t) {
+  async getOrderById(userId, query, t) {
     if (!t) {
       t = await transaction();
     }
@@ -180,12 +180,12 @@ class OrderService {
 
       const arg = {
         attributes: selectArray,
-        where: { id: orderId },
+        where: { userId: userId },
         transaction: t,
         include: association,
       };
 
-      const order = await orderConfig.model.findOne(arg);
+      const order = await orderConfig.model.findAndCountAll(arg);
       await commit(t);
       Logger.info("Get order by ID service ended...");
       return order;

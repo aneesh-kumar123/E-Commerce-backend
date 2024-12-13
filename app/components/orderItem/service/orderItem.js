@@ -1,7 +1,11 @@
 const orderItemConfig = require("../../../model-config/order-item-config");
+const prductConfig = require("../../../model-config/product-config");
+const orderConfig = require("../../../model-config/order-config");
+const userConfig = require("../../../model-config/user-config");
 const Logger = require("../../../utils/logger");
 const NotFoundError = require("../../../errors/notFoundError");
 const { transaction, rollBack, commit } = require("../../../utils/transaction");
+const { createUUID } = require("../../../utils/uuid");
 
 class OrderItemService {
   async getOrderItemsByOrderId(orderId, t) {
@@ -30,19 +34,56 @@ class OrderItemService {
     }
   }
 
-  async createOrderItem(orderId, productId, quantity, priceAtOrder, t) {
+  async createOrderItem(id,userId, productId, quantity, priceAtOrder, t) {
     if (!t) {
       t = await transaction();
     }
 
     try {
       Logger.info("Create order item service started...");
-      const orderItem = await orderItemConfig.model.create(
-        {
-          orderId,
-          productId,
+
+      const product = await prductConfig.model.findByPk(productId, {
+        transaction: t,
+      });
+
+      const user = await userConfig.model.findByPk(userId, {
+        transaction: t,
+      })
+
+
+
+
+      if (!product) {
+        throw new NotFoundError("Product not found");
+      }
+
+      const totalPrice = product.price * quantity;
+      // const orderId= createUUID();
+      const userAddress = user.address;
+
+      const paymentMethod = "credit card";
+      const orderStatus = "processing";
+      const paymentStatus = "paid";
+
+     
+      const response = await orderConfig.model.create(
+        { id,
+          userId, 
+          orderStatus, 
+          totalAmount: totalPrice, 
+          paymentStatus, 
+          paymentMethod, 
+          shippingAddress: userAddress,
+        },
+        { transaction: t }
+      );
+
+    const orderItem=  await orderItemConfig.model.create(
+        { id:createUUID(),
+          orderId: response.id, 
+          productId ,
           quantity,
-          priceAtOrder,
+          priceAtOrder
         },
         { transaction: t }
       );

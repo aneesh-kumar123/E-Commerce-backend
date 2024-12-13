@@ -105,6 +105,54 @@ class CategoryController {
       next(error);
     }
   }
+
+
+  async uploadCategoryCSV(req, res, next) {
+    try {
+      Logger.info("upload category csv controller started...");
+
+      const file = req.file; // Multer adds the file to req.file
+      console.log("FILE : ", file);
+      if (!file) {
+        return res.status(400).json({ error: "Please upload a CSV file" });
+      }
+
+      const category = await this.parseCSV(file.path); // Parse the CSV file
+
+      console.log("Employees parsed from CSV: ", category);
+
+      // Store employees in the database
+      const addedCategory = await this.categoryService.addMultipleCategory(
+        category
+      );
+      Logger.info("upload employees csv controller ended...");
+      res.status(HttpStatusCode.Created).json({ data: addedCategory });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  parseCSV(filePath) {
+    // Parse CSV using a library like 'papaparse'
+    Logger.info("Parse csv started...");
+    return new Promise((resolve, reject) => {
+      const fs = require("fs");
+      const Papa = require("papaparse");
+      const file = fs.readFileSync(filePath, "utf8");
+
+      Papa.parse(file, {
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true,
+        complete: (result) => {
+          resolve(result.data); // Parsed data
+        },
+        error: (error) => {
+          reject(error);
+        },
+      });
+    });
+  }
 }
 
 const categoryController = new CategoryController();

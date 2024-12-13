@@ -47,8 +47,16 @@ class CartService {
       const arg = {
         attributes: selectArray,
         where: { userId },
+        include: [
+          {
+            model: cartItemConfig.model,
+            required: false
+          },
+          
+        ],
         transaction: t,
-        include: associations,
+        // include: associations,
+        
       };
 
       // console.log("the arg is",arg);
@@ -61,7 +69,7 @@ class CartService {
 
       await commit(t);
       Logger.info("Get cart by User ID service ended...");
-      return cart;
+      return cart.cartItems;
     } catch (error) {
       await rollBack(t);
       Logger.error(error);

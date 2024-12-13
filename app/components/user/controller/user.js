@@ -52,20 +52,20 @@ class UserController {
   async createAdmin(req, res, next) {
     try {
       Logger.info("Create admin controller started...");
-      const { firstName, lastName, username, password, email, dateOfBirth } = req.body;
+      const { firstName, lastName, username, password, email, dateOfBirth,address,city,isAdmin,profileImage } = req.body;
       
       validateFirstName(firstName);
       validateLastName(lastName);
       validateEmail(email);
       validateDob(dateOfBirth);
-
+    
       if (firstName === lastName) throw new badRequest("First name and last name cannot be the same.");
       if (typeof username !== "string") throw new badRequest("Invalid username type");
       if (typeof password !== "string") throw new badRequest("Invalid password type");
 
       let id = createUUID();
       let response = await this.userService.createUser(
-        id, firstName, lastName, username, password, email, dateOfBirth, true
+        id, firstName, lastName, username, password, email, dateOfBirth,address,city,profileImage,isAdmin
       );
       
       Logger.info("Create admin controller ended...");
@@ -79,7 +79,7 @@ class UserController {
   async createUser(req, res, next) {
     try {
       Logger.info("Create user controller started...");
-      const { firstName, lastName, username, password, email, dateOfBirth, address, city, profileImage } = req.body;
+      const { firstName, lastName, username, password, email, dateOfBirth,address,city,isAdmin,profileImage } = req.body;
 
       validateFirstName(firstName);
       validateLastName(lastName);
@@ -91,7 +91,7 @@ class UserController {
 
       let id = createUUID();
       let response = await this.userService.createUser(
-        id, firstName, lastName, username, password, email, dateOfBirth, false, address, city, profileImage
+        id, firstName, lastName, username, password, email, dateOfBirth,address,city,profileImage,isAdmin
       );
       
       Logger.info("Create user controller ended...");

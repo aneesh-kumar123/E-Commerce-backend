@@ -19,9 +19,13 @@
     "decimal.js": "^10.4.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "fs": "^0.0.1-security",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.16",
+    "papaparse": "^5.4.1",
+    "path": "^0.12.7",
     "pg": "^8.13.1",
     "sequelize": "^6.37.5",
     "uuid": "^11.0.3"

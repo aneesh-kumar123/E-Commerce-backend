@@ -3,6 +3,7 @@ const Logger = require("../../../utils/logger");
 const { HttpStatusCode } = require("axios");
 const NotFoundError = require("../../../errors/notFoundError");
 const { validateUUID } = require("../../../utils/uuid");
+const {createUUID} = require("../../../utils/uuid");
 
 class OrderItemController {
   constructor() {
@@ -28,11 +29,14 @@ class OrderItemController {
   async createOrderItem(req, res, next) {
     try {
       Logger.info("Create order item controller started...");
-      const { orderId, productId, quantity, priceAtOrder } = req.body;
-      validateUUID(orderId);
+      const { userId}= req.params;
+      const {  productId, quantity, priceAtOrder } = req.body;
+      // validateUUID(orderId);
       validateUUID(productId);
+      const id = createUUID();
+    
 
-      const response = await this.orderItemService.createOrderItem(orderId, productId, quantity, priceAtOrder);
+      const response = await this.orderItemService.createOrderItem(id,userId, productId, quantity, priceAtOrder);
       Logger.info("Create order item controller ended...");
       res.status(HttpStatusCode.Created).json(response);
     } catch (error) {

@@ -15,13 +15,13 @@ class OrderController {
     try {
       Logger.info("Create order controller started...");
       const { userId } = req.params; 
-      const { orderStatus, totalAmount, paymentStatus, paymentMethod, shippingAddress } = req.body;
+      const { orderStatus, paymentStatus, paymentMethod,} = req.body;
       
       
       validateUUID(userId);
       
      let id=createUUID();
-      const response = await this.orderService.createOrder(id,userId, orderStatus, totalAmount, paymentStatus, paymentMethod, shippingAddress);
+      const response = await this.orderService.createOrder(id,userId, orderStatus, paymentStatus, paymentMethod);
       Logger.info("Create order controller ended...");
       res.status(HttpStatusCode.Created).json(response);
     } catch (error) {
@@ -44,10 +44,10 @@ class OrderController {
   async getOrderById(req, res, next) {
     try {
       Logger.info("Get order by ID controller started...");
-      const { userId, orderId} = req.params;
-      validateUUID(orderId);
+      const { userId} = req.params;
+      // validateUUID(orderId);
 
-      const response = await this.orderService.getOrderById(userId,orderId,req.query);
+      const response = await this.orderService.getOrderById(userId,req.query);
       if (!response) throw new NotFoundError("Order not found");
 
       Logger.info("Get order by ID controller ended...");

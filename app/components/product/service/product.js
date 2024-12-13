@@ -110,6 +110,29 @@ class ProductService {
       throw error;
     }
   }
+  async getAllProductsByCategoryId(categoryId, t) {
+    if (!t) {
+      t = await transaction();
+    }
+
+    try {
+      Logger.info("Get all products service started...");
+      
+
+      const { count, rows } = await productConfig.model.findAndCountAll(
+        {
+          where: { categoryId: categoryId },
+        }
+      );
+      await commit(t);
+      Logger.info("Get all products service ended...");
+      return { count, rows };
+    } catch (error) {
+      await rollBack(t);
+      Logger.error(error);
+      throw error;
+    }
+  }
 
   // Get Product by ID
   async getProductById(productId, query, t) {

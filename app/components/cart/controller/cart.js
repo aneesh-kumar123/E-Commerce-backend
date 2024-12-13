@@ -21,6 +21,7 @@ class CartController {
       validateUUID(userId);
 
       const response = await this.cartService.getCartByUserId(userId,req.query);
+      // setXTotalCountHeader(res, count);
       if (!response) throw new NotFoundError("Cart not found");
 
       Logger.info("Get cart by User ID controller ended...");
@@ -38,7 +39,7 @@ class CartController {
       const { productId, quantity } = req.body;
       validateUUID(userId);
       validateUUID(productId);
-      validateQuantity(quantity);
+      // validateQuantity(quantity);
 
 
       // if (!productId || quantity <= 0) {
